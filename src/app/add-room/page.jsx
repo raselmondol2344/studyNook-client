@@ -2,20 +2,20 @@
 import { Card,FieldError,Input,TextField,Label,Select,Button, TextArea, ListBox } from "@heroui/react";
 
 
-const AddRoompage = () => {
+const addRoompage = () => {
 
     const onSubmit = async(e)=>{
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
-        const destinasion = Object.fromEntries(formData.entries())
-        console.log(destinasion);
+        const rooms = Object.fromEntries(formData.entries())
+        console.log(rooms);
 
-        const res = await fetch ("http://localhost:8000/destinations",{
+        const res = await fetch ("http://localhost:8000/rooms",{
             method: 'POST',
             headers:{
                 'content-type': 'application/json'
             },
-            body:JSON.stringify(destinasion)
+            body:JSON.stringify(rooms)
         });
         const data = await res.json()
         console.log(data);
@@ -32,7 +32,7 @@ const AddRoompage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Destination Name */}
               <div className="md:col-span-2">
-                <TextField name="RoomName" isRequired>
+                <TextField name="name" isRequired>
                   <Label>Room Name</Label>
                   <Input placeholder="enter a room name" className="rounded-2xl" />
                   <FieldError />
@@ -47,7 +47,58 @@ const AddRoompage = () => {
               </TextField>
 
               {/* Category - Updated Select Component */}
-              <div>
+             
+
+              {/* Price */}
+              <TextField name="hourlyRate" type="number" isRequired>
+                <Label>Hourly rate (USD)</Label>
+                <Input
+                  type="number"
+                  placeholder="0000"
+                  className="rounded-2xl"
+                />
+                <FieldError />
+              </TextField>
+
+              {/* Duration */}
+              <TextField name="setcapacity" isRequired>
+                <Label>Seat capacity</Label>
+                <Input
+                  placeholder="xxxxxx"
+                  className="rounded-2xl"
+                />
+                <FieldError />
+              </TextField>
+
+    
+
+              {/* Image URL - Removed preview */}
+              <div className="md:col-span-2">
+                <TextField name="image" isRequired>
+                  <Label>Image URL</Label>
+                  <Input
+                    type="url"
+                    placeholder="https://example.com/bali-paradise.jpg"
+                    className="rounded-2xl"
+                  />
+                  <FieldError />
+                </TextField>
+              </div>
+
+              {/* Description */}
+              <div className="md:col-span-2">
+                <TextField name="description" isRequired>
+                  <Label>Description</Label>
+                  <TextArea
+                    placeholder="Describe the travel experience..."
+                    className="rounded-3xl"
+                  />
+                  <FieldError />
+                </TextField>
+              </div>
+            </div>
+
+             <div>
                 <Select
                   name="category"
                   isRequired
@@ -84,55 +135,6 @@ const AddRoompage = () => {
                 </Select>
               </div>
 
-              {/* Price */}
-              <TextField name="price" type="number" isRequired>
-                <Label>Hourly rate (USD)</Label>
-                <Input
-                  type="number"
-                  placeholder="0000"
-                  className="rounded-2xl"
-                />
-                <FieldError />
-              </TextField>
-
-              {/* Duration */}
-              <TextField name="setcapacity" isRequired>
-                <Label>Seat capacity</Label>
-                <Input
-                  placeholder="xxxxxx"
-                  className="rounded-2xl"
-                />
-                <FieldError />
-              </TextField>
-
-    
-
-              {/* Image URL - Removed preview */}
-              <div className="md:col-span-2">
-                <TextField name="imageUrl" isRequired>
-                  <Label>Image URL</Label>
-                  <Input
-                    type="url"
-                    placeholder="https://example.com/bali-paradise.jpg"
-                    className="rounded-2xl"
-                  />
-                  <FieldError />
-                </TextField>
-              </div>
-
-              {/* Description */}
-              <div className="md:col-span-2">
-                <TextField name="description" isRequired>
-                  <Label>Description</Label>
-                  <TextArea
-                    placeholder="Describe the travel experience..."
-                    className="rounded-3xl"
-                  />
-                  <FieldError />
-                </TextField>
-              </div>
-            </div>
-
             {/* Buttons */}
 
             <Button
@@ -150,4 +152,4 @@ const AddRoompage = () => {
     );
 };
 
-export default AddRoompage;
+export default addRoompage;

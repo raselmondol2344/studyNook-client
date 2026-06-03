@@ -9,9 +9,10 @@ const Navbar = () => {
    
     return (
         <nav className="flex justify-around p-10 bg-gray-400 items-center border-b border-gray-300">
+            <h1 className="text-4xl font-bold text-orange-700">StudyNook</h1>
             <ul className="flex gap-10">
                 <li><Link href={"/"}>Home</Link></li>
-                <li><Link href={"/rooms"}>Rooms</Link></li>
+                <li><Link href={"/room"}>Rooms</Link></li>
                 <li><Link href={"/my-booking"}>My Booking</Link></li>
                 <li><Link href={"/my-listing"}>My Listing</Link></li>     
                 <li><Link href={"add-room"}>Add Room</Link></li>

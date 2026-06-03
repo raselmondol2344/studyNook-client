@@ -104,8 +104,7 @@ const addRoompage = () => {
                   isRequired
                   className="w-full"
                   placeholder="Select category"
-                >
-                    
+                >   
                   <Label>Amenities</Label>
                   <Select.Trigger className="rounded-2xl">
                     <Select.Value />

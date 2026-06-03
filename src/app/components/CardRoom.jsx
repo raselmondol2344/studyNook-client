@@ -13,15 +13,6 @@ const CardRoom = ({roomsdata}) => {
         <div >
             <div className="card bg-gray-100  shadow-lg">
   <figure className="px-10 pt-10">
-    {/* <Image
-    src={image}
-    height={400}
-    width={400}
-    alt={name}
-     className="w-70 h-50 object-cover rounded-xl"
-      
-    
-    /> */}
 
     {image && image.trim() !== "" && (
   <Image

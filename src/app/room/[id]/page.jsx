@@ -1,6 +1,6 @@
 //import BookingCard from "@/app/components/BookingCard";
-//import { DeleteAlert } from "@/app/components/DeleteAlert";
-//import { EditModal } from "@/app/components/EditModal";
+import { DeleteAlert } from "@/app/components/DeleteAlert";
+import { EditModal } from "@/app/components/EditModal";
 //import { auth } from "@/lib/auth";
 import { Button, Card, DateField, Label} from "@heroui/react";
 import { headers } from "next/headers";
@@ -25,16 +25,19 @@ const desdetailspage =async ({params}) => {
     const {_id,name,floor,hourlyRate,seatCapacity,description,image} = roomdetails
     console.log(roomdetails);
     return (
+
+
+        
       
         
            <div className="card lg:card-side bg-base-100 shadow-sm ">
-            {/* <div className="flex justify-end mt-5 mb-3 gap-5 ">
-              <EditModal destination = {destination} ></EditModal>
+            <div className="flex justify-end mt-5 mb-3 gap-5 ">
+              <EditModal roomdetails = {roomdetails} ></EditModal>
 
-              <DeleteAlert destination = {destination}></DeleteAlert>
+              <DeleteAlert roomdetails = {roomdetails}></DeleteAlert>
         
         
-      </div> */}
+      </div>
  <div className="flex gap-10 items-center"> 
     <div>
      <figure>
@@ -68,10 +71,10 @@ const desdetailspage =async ({params}) => {
      </div>
 
       <div>
-        <h3 className="text-lg font-semibold">{hourlyRate}</h3>
+        <h3 className="text-lg font-semibold">${hourlyRate}</h3>
       </div>
       <div className="flex gap-2 items-center">
-       <h3>{seatCapacity}</h3>
+       <h3>seat: {seatCapacity}</h3>
       </div>
       <div>
         {description}

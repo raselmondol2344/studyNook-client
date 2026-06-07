@@ -7,7 +7,6 @@ const allroomspage = async() => {
     //console.log(roomsdata);
     return (
 
- 
         <div >
             <h1 className="font-bold text-xl p-10 flex justify-start ">All Room</h1>
             <RoomList initialRooms={roomsdata}></RoomList>

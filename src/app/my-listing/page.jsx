@@ -11,6 +11,8 @@ const MyListingsPage = () => {
     const [listings, setListings] = useState([]);
     const [loadingListings, setLoadingListings] = useState(true);
 
+
+    
     useEffect(() => {
         const fetchMyListings = async () => {
             if (!user?.id) return;

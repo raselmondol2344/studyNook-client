@@ -1,7 +1,7 @@
 
 import CardRoom from "./CardRoom";
 const LatestRooms = async() => {
-     const res = await fetch("http://localhost:8000/rooms")
+     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`)
     const roomsdata = await res.json()
     return (
        

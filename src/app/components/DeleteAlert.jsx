@@ -11,7 +11,7 @@ export function DeleteAlert({roomdetails}) {
      const handleCLick = async()=>{
       
 
-        const res = await fetch (`http://localhost:8000/rooms/${_id}`,{
+        const res = await fetch (`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${_id}`,{
             method: 'DELETE',
             headers:{
                 'content-type': 'application/json'

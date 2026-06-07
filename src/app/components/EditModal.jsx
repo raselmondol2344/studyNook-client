@@ -23,7 +23,7 @@ export function EditModal({ roomdetails }) {
     };
 
     try {
-      const res = await fetch(`http://localhost:8000/rooms/${_id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${_id}`, {
         method: 'PATCH',
         headers: {
           'content-type': 'application/json'

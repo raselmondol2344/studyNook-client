@@ -20,7 +20,7 @@ const addRoompage = () => {
       }
 
 
-      const res = await fetch("http://localhost:8000/rooms", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',

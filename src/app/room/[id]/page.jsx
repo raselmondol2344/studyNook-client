@@ -17,7 +17,7 @@ const desdetailspage = async ({ params }) => {
         redirect("/login");
     }
 
-    const res = await fetch(`http://localhost:8000/rooms/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${id}`, {
         headers: {
             authorization: `Bearer ${tokenObj.token}`
         }

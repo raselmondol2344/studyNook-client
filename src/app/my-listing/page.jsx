@@ -18,7 +18,7 @@ const MyListingsPage = () => {
             try {
                 const { data: tokendata } = await authClient.token();
 
-                const res = await fetch(`http://localhost:8000/my-listings`, {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/my-listings`, {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${tokendata?.token}`

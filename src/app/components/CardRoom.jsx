@@ -5,7 +5,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 
 
 const CardRoom = ({roomsdata}) => {
- const {_id,name,floor,category,hourlyRate,seatCapacity,description,image} = roomsdata;
+ const {_id,name,floor,hourlyRate,seatCapacity,description,image} = roomsdata;
 
   console.log(roomsdata);
  

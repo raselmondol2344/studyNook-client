@@ -1,96 +1,88 @@
-//import BookingCard from "@/app/components/BookingCard";
+import BookingCard from "@/app/components/BookingCard";
 import { DeleteAlert } from "@/app/components/DeleteAlert";
 import { EditModal } from "@/app/components/EditModal";
-//import { auth } from "@/lib/auth";
-import { Button, Card, DateField, Label} from "@heroui/react";
+import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import Image from "next/image";
-import Link from "next/link";
-import { BiEdit } from "react-icons/bi";
+import { redirect } from "next/navigation";
 
-import { FiMapPin } from "react-icons/fi";
-import { MdDateRange } from "react-icons/md";
+const desdetailspage = async ({ params }) => {
+    const { id } = await params
 
+    const tokenObj = await auth.api.getToken({
+        headers: await headers()
+    }).catch(() => null);
 
-const desdetailspage =async ({params}) => {
-    const {id} =await params
+    if (!tokenObj?.token) {
+        redirect("/login");
+    }
 
+    const res = await fetch(`http://localhost:8000/rooms/${id}`, {
+        headers: {
+            authorization: `Bearer ${tokenObj.token}`
+        }
+    })
     
-    
-    //console.log(token);
+    if (!res.ok) {
+        return <div className="text-center py-10 font-semibold text-red-500">Failed to load room details</div>;
+    }
 
-    const res = await fetch(`http://localhost:8000/rooms/${id}`)
     const roomdetails = await res.json()
+    const { name, floor, hourlyRate, seatCapacity, description, image } = roomdetails
 
-    const {_id,name,floor,hourlyRate,seatCapacity,description,image} = roomdetails
-    console.log(roomdetails);
     return (
+        <div className="max-w-8xl mx-auto p-4 md:p-6">
+            <div className="flex justify-end gap-3 mb-5 flex-wrap">
+                <EditModal roomdetails={roomdetails} />
+                <DeleteAlert roomdetails={roomdetails} />
+            </div>
 
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start lg:items-center">
+                <div className="w-full lg:w-1/2">
+                    {image ? (
+                        <Image
+                            src={image}
+                            width={500}
+                            height={500}
+                            alt={name}
+                            className="w-full h-64 md:h-96 lg:h-[500px] object-cover rounded-xl"
+                        />
+                    ) : (
+                        <div className="w-full h-64 md:h-96 lg:h-[500px] bg-gray-200 rounded-xl flex items-center justify-center">
+                            No Image
+                        </div>
+                    )}
+                </div>
 
-        
-      
-        
-           <div className="card lg:card-side bg-base-100 shadow-sm ">
-            <div className="flex justify-end mt-5 mb-3 gap-5 ">
-              <EditModal roomdetails = {roomdetails} ></EditModal>
+                <div className="flex-1 w-full">
+                    <div className="flex flex-col xl:flex-row gap-8 justify-between items-start xl:items-center">
+                        <div className="flex-1 space-y-4">
+                            <h1 className="text-2xl md:text-3xl font-bold">
+                                {name}
+                            </h1>
 
-              <DeleteAlert roomdetails = {roomdetails}></DeleteAlert>
-        
-        
-      </div>
- <div className="flex gap-10 items-center"> 
-    <div>
-     <figure>
-   {image ? (
-  <Image
-    src={image}
-    height={500}
-    width={500}
-    alt={name}
-    className="w-70 md:w-100 lg:w-150 h-50 md:h-80 lg:h-100 object-cover rounded-xl"
-  />
-) : (
-  <div className="w-70 md:w-100 lg:w-150 h-50 md:h-80 lg:h-100 bg-gray-200 rounded-xl flex items-center justify-center">
-    No Image
-  </div>
-)}
-  </figure>
- </div>
+                            <div className="flex items-center gap-2">
+                                <span className="font-medium">Floor:</span>
+                                <span>{floor}</span>
+                            </div>
 
+                            <div className="flex items-center gap-2">
+                                <span className="font-medium">Seat Capacity:</span>
+                                <span>{seatCapacity}</span>
+                            </div>
 
-  <div className="card-body">
-    <div id="main" className="flex justify-between items-center gap-20 ">
-    <div id="one" className="space-y-2">
-     <div className="flex justify-between">
-         <div className="flex gap-1 items-center">
-         <h1 className="text-xl font-bold">{name}</h1>
-      </div>
+                            <p className="text-gray-600 leading-relaxed">
+                                {description}
+                            </p>
+                        </div>
 
-    
-      
-     </div>
-
-      <div>
-        <h3 className="text-lg font-semibold">${hourlyRate}</h3>
-      </div>
-      <div className="flex gap-2 items-center">
-       <h3>seat: {seatCapacity}</h3>
-      </div>
-      <div>
-        {description}
-      </div>
-       
-
-    </div>
-
-   {/* <div id="two">
-    <BookingCard destination={destination}></BookingCard>
-   </div> */}
-  </div>
-  </div>
- </div>
-</div>
-       
+                        <div className="w-full xl:w-[350px] shrink-0">
+                            <BookingCard roomdetails={roomdetails} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

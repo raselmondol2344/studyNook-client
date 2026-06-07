@@ -1,8 +1,6 @@
 import CardRoom from "../components/CardRoom";
 import RoomList from "../components/RoomList";
 
-
-
 const allroomspage = async() => {
     const res = await fetch("http://localhost:8000/rooms")
     const roomsdata = await res.json()
